@@ -28,6 +28,7 @@ startup_message off
 autodetach on
 
 logfile "$HOME/.screen/screen-%Y%m%d-%n.log"
+screen 0
 log on
 deflog on
 
