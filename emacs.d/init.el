@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-16 15:25:07 kikuchi>
+;; Time-stamp: <2011-09-17 01:01:38 kikuchi>
 ;;
 ;;==============================================================
 
@@ -149,7 +149,12 @@
   (setq c-basic-offset tab-width)
   ;(c-toggle-auto-state t)
   )
-(add-hook 'c++-mode-hook 'my-c-mode-common-hook)
+;; (add-hook 'c++-mode-hook 'my-c-mode-common-hook)
+
+;; google-c-style
+(require 'google-c-style)
+(add-hook 'c++-mode-hook 'google-set-c-style)
+(add-hook 'c++-mode-hook 'google-make-newline-indent)
 
 ;;=========================================
 ;; ruby-mode
