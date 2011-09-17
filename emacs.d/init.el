@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-17 17:07:04 kikuchi>
+;; Time-stamp: <2011-09-17 18:34:00 kikuchi>
 ;;
 ;;==============================================================
 
@@ -120,7 +120,9 @@
 ;; ファイルの種類に応じてコンパイル
 (require 'smart-compile)
 (define-key esc-map "m" 'smart-compile)
-(setq compilation-window-height 15)
+(define-key esc-map "n" 'next-error)
+(define-key esc-map "p" 'previous-error)
+(setq compilation-window-height 10)
 
 ;;;=====================================
 ;;; auto-mode
