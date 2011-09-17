@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-17 14:46:06 kikuchi>
+;; Time-stamp: <2011-09-17 17:07:04 kikuchi>
 ;;
 ;;==============================================================
 
@@ -102,7 +102,7 @@
 (global-set-key [end]  'end-of-buffer )
 (global-set-key [home] 'beginning-of-buffer )
 ;; compile set-up (make)
-(define-key esc-map "m" 'compile)
+;; (define-key esc-map "m" 'compile)
 (define-key esc-map "k" 'kill-compilation)
 (setq compile-command "make ")
 ;; カーソル行の単語をコピー，grep
@@ -116,6 +116,11 @@
     (grep-find (format "%s %s"
                        command (car kill-ring)))))
 (define-key global-map "\C-cG" 'grep-find-current-word)
+
+;; ファイルの種類に応じてコンパイル
+(require 'smart-compile)
+(define-key esc-map "m" 'smart-compile)
+(setq compilation-window-height 15)
 
 ;;;=====================================
 ;;; auto-mode
