@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-17 18:34:00 kikuchi>
+;; Time-stamp: <2011-09-20 10:11:39 kikuchi>
 ;;
 ;;==============================================================
 
@@ -162,7 +162,7 @@
 (require 'google-c-style)
 (add-hook 'c++-mode-hook
 		  '(lambda ()
-			 ;; (setq indent-tabs-mode t)
+			 (setq indent-tabs-mode t)
 			 (setq tab-width 4)
 			 (setq c-basic-offset tab-width)
 			 (c-set-offset 'label '-)
