@@ -22,8 +22,8 @@ bind 'U' eval "encoding utf8" "stuff 'export LANG=ja_JP.UTF-8\012'"
 bind 'E' eval "encoding euc" "stuff 'export LANG=ja_JP.EUC-JP\012'"
 bind 'J' eval "encoding sjis"  "stuff 'export LANG=ja_JP.SJIS\012'"
 
-termcap kterm hs@
-terminfo kterm hs@
+termcap xterm hs@
+terminfo xterm hs@
 startup_message off
 autodetach on
 
@@ -33,3 +33,13 @@ log on
 deflog on
 
 defc1 off
+
+# あたらしいwindowのlogin flagをoffにする
+deflogin off
+
+# 反転が変にならない
+termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
+# これでステータスラインが消えなくなる
+termcapinfo xterm* 'hs:ts=\E[?E\E[?%i%dT:fs=\E[?F:es:ds=\E[?E'
+# 縮まない
+termcapinfo xterm 'cl=\E[H\E[2J'
