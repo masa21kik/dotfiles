@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-25 11:58:42 kikuchi>
+;; Time-stamp: <2011-09-25 14:29:54 kikuchi>
 ;;
 ;;==============================================================
 
@@ -137,6 +137,7 @@
                 ("\\.c$" . c++-mode)
                 ("\\.h$" . c++-mode)
                 ("\\.rb$" . ruby-mode)
+                ("\\.erb$" . rhtml-mode)
                 ("\\.html$" . html-mode)
                 ("\\.yaml$" . yaml-mode)
                 ("\\.js$" . javascript-mode)
@@ -206,12 +207,16 @@
                (when (char-equal ?\# (preceding-char))
                  (forward-char 1)
                  (insert "}")))))))
-;; rinari.el
+;; rinari.el for Rails
 (require 'rinari)
-(require 'rinari)
+
+;;=========================================
+;; rhtml-mode
+;;=========================================
 (require 'rhtml-mode)
 (add-hook 'rhtml-mode-hook
 		  (lambda () (rinari-launch)))
+
 ;;=========================================
 ;; yaml-mode
 ;;=========================================
@@ -232,6 +237,15 @@
    nil
    (expand-file-name "~/memo/diary.txt")))
 (define-key ctl-x-map "M" 'memo)
+
+;;;====================================
+;; yasnippet
+;;;====================================
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/yasnippet/snippets")
+(yas/load-directory "~/.emacs.d/yasnippet/yasnippets-rails/rails-snippets")
+(setq yas/global-mode t)
 
 ;;=========================================
 ;; テンプレート

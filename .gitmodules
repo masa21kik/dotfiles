@@ -4,3 +4,6 @@
 [submodule "emacs.d/elisp/rhtml"]
 	path = emacs.d/elisp/rhtml
 	url = https://github.com/eschulte/rhtml.git
+[submodule "emacs.d/yasnippet/yasnippets-rails"]
+	path = emacs.d/yasnippet/yasnippets-rails
+	url = https://github.com/eschulte/yasnippets-rails.git
