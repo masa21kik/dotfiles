@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-25 11:10:24 kikuchi>
+;; Time-stamp: <2011-09-25 11:58:42 kikuchi>
 ;;
 ;;==============================================================
 
@@ -24,6 +24,8 @@
       (append
        (list
 		(expand-file-name "~/.emacs.d/elisp/")
+		(expand-file-name "~/.emacs.d/elisp/rinari")
+		(expand-file-name "~/.emacs.d/elisp/rhtml")
 		)
        load-path))
 
@@ -204,7 +206,12 @@
                (when (char-equal ?\# (preceding-char))
                  (forward-char 1)
                  (insert "}")))))))
-
+;; rinari.el
+(require 'rinari)
+(require 'rinari)
+(require 'rhtml-mode)
+(add-hook 'rhtml-mode-hook
+		  (lambda () (rinari-launch)))
 ;;=========================================
 ;; yaml-mode
 ;;=========================================
