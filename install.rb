@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 # -*- mode: ruby; coding: utf-8 -*-
 
+puts `git submodule init && git submodule update`
+Dir.chdir('emacs.d/elisp/rinari') {
+  puts `git submodule init && git submodule update`
+}
+
 pwd = File.expand_path(File.dirname(__FILE__))
 dot_installs = [
                 'zsh.d',
