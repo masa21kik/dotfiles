@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-25 10:35:59 kikuchi>
+;; Time-stamp: <2011-09-25 11:10:24 kikuchi>
 ;;
 ;;==============================================================
 
@@ -185,6 +185,25 @@
 ;; ruby-electric.el
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+;;; '{'の後の'|'はスペースなしでも補完するようにする
+(defconst ruby-electric-expandable-bar
+  "\\(\\s-do\\|{\\)\\s-*|")
+;;; '{'の後にスペースを挿入しない
+(defun ruby-electric-curlies(arg)
+  (interactive "P")
+  (self-insert-command (prefix-numeric-value arg))
+  (if (ruby-electric-is-last-command-char-expandable-punct-p)
+      (cond ((ruby-electric-code-at-point-p)
+             (save-excursion
+               (if ruby-electric-newline-before-closing-bracket
+                   (newline))
+               (insert "}")))
+            ((ruby-electric-string-at-point-p)
+             (save-excursion
+               (backward-char 1)
+               (when (char-equal ?\# (preceding-char))
+                 (forward-char 1)
+                 (insert "}")))))))
 
 ;;=========================================
 ;; yaml-mode
