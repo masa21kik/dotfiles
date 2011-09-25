@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-20 10:11:39 kikuchi>
+;; Time-stamp: <2011-09-25 10:35:59 kikuchi>
 ;;
 ;;==============================================================
 
@@ -182,6 +182,9 @@
 			 (setq ruby-indent-level tab-width)
 			 )
 		  )
+;; ruby-electric.el
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
 
 ;;=========================================
 ;; yaml-mode
