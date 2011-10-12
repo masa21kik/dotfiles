@@ -13,6 +13,7 @@ bindkey '^S' history-incremental-pattern-search-forward
 setopt auto_cd
 ## cdで移動してもpushdと同じようにディレクトリスタックに追加する。
 setopt auto_pushd
+setopt pushd_ignore_dups
 ## カレントディレクトリ中に指定されたディレクトリが見つからなかった場合に
 ## 移動先を検索するリスト。
 cdpath=(~)
@@ -273,6 +274,7 @@ alias mv="mv -i"
 ## pushd/popdのショートカット。
 alias pd="pushd"
 alias po="popd"
+alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 
 ## screen
 alias screen='screen -D -RR'
