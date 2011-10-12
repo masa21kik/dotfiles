@@ -1,15 +1,17 @@
 #!/usr/bin/env ruby
 
 src_files = ARGV.select{|e| e =~ /\.(c|cc|cpp|h)\z/}
-`cpplint #{src_files.join(' ')}`
+compiler = nil
 
 case $0
 when /lintg\+\+\z/
+  `cpplint #{src_files.join(' ')}`
   compiler = ARGV.select{|e| e =~ /\ACXX=(.+)/}.empty? ? "g++" : $1
   ARGV.delete_if{|e| e =~ /\ACXX=/}
-  `#{compiler} #{ARGV.join(' ')}`
 when /lintgcc\z/
+  `clint #{src_files.join(' ')}`
   compiler = ARGV.select{|e| e =~ /\ACC=(.+)/}.empty? ? "gcc" : $1
   ARGV.delete_if{|e| e =~ /\ACC=/}
-  `#{compiler} #{ARGV.join(' ')}`
 end
+
+`#{compiler} #{ARGV.join(' ')}` if compiler

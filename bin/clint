@@ -1,0 +1,4 @@
+#!/bin/sh
+
+opt="--filter=-whitespace/labels,-whitespace/tab,-legal/copyright,-readability/casting"
+python $(cd $(dirname $0); pwd)/cpplint.py $opt $@
