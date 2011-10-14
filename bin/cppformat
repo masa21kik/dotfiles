@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# -*- mode: ruby; coding: utf-8 -*-
+
+def format_line(l)
+  s = l
+  s.gsub!(/ +\(/, '(') unless s =~ /\A\s*\/\/|copyright|\A#/i
+  %w{if for while switch do}.each do |c|
+    s.gsub!(/#{c}\(/, "#{c} (")
+  end
+  s.gsub!(/\}else/, '} else')
+  s.gsub!(/else\{/, 'else {')
+  s.gsub!(/\(\s+/, '(')
+  s.gsub!(/ +\)/, ')')
+  s.gsub!(/\[\s+/, '[')
+  s.gsub!(/\s+\]/, ']')
+  s.gsub!(/\)\{/, ') {')
+  s.gsub!(/\s+\z/, '')
+  s.gsub!(/([^\s])\s+;/, '\1;')
+  s.gsub!(/\A +\t/, "\t")
+  s.gsub!(/([^\s\/])\s?\/\//, '\1  //')
+  s.gsub!(/\/\/([^ \/])/, '// \1')
+  s.gsub!(/,([^\s])/, ', \1')
+  s.gsub!(/([^ ])(\&\&|\|\|)/, '\1 \2')
+  s.gsub!(/(\&\&|\|\|)([^ ])/, '\1 \2')
+  s.gsub!(/([^\s=!<>\|\+\-\*\/\&\^])=/, '\1 =') unless s =~ /'[^=]*=[^=]*'|"[^=]*=[^=]*"/
+  s.gsub!(/=([^\s=])/, '= \1') unless s =~ /'[^=]*=[^=]*'|"[^=]*=[^=]*"/
+  s
+end
+
+def format_code(code)
+  s = ""
+  code.split("\n").each do |l|
+    s << format_line(l)
+    s << "\n"
+  end
+  s.gsub!(/(\n[^\/]+)\)\n\s*\{/, '\1) {')
+  s.gsub!(/\n\n\n/, "\n\n")
+  # s.gsub!(/\n\s*\)/m, ')')
+  s.gsub!(/\n(\n[ \t]*)\}/, '\1}')
+  s.gsub!(/\{\n\n/, "{\n")
+  s.gsub!(/\}\n\s*else/m, '} else')
+  s.gsub!(/else\n\s*\{/m, 'else {')
+  s.gsub!(/(public|private|protected):\n\n+/, '\1:' + "\n")
+  s
+end
+
+def print_usage
+  puts "Usage: #{__FILE__} [-i] file1 [file2...]"
+  puts "  -i : overwrite mode"
+end
+
+if __FILE__ == $0
+  is_overwrite = false
+  opts = ARGV.select{|a| a =~ /\A-/}
+  opts.each do |o|
+    case o
+    when '-i'
+      is_overwrite = true
+    else
+      print_usage
+      exit -1
+    end
+  end
+  files = ARGV - opts
+  files.each do |file|
+    code = format_code(File.read(file))
+    if is_overwrite
+      File.open(file, 'w') {|f|
+        f.puts code
+      }
+    else
+      puts code
+    end
+  end
+end
