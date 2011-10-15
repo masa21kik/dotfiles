@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-09-25 14:29:54 kikuchi>
+;; Time-stamp: <2011-10-15 13:56:41 kikuchi>
 ;;
 ;;==============================================================
 
@@ -168,6 +168,7 @@
 			 (setq indent-tabs-mode t)
 			 (setq tab-width 4)
 			 (setq c-basic-offset tab-width)
+			 (c-set-offset 'inextern-lang 0)
 			 (c-set-offset 'label '-)
 			 (c-set-offset 'case-label 0)
 			 (c-set-offset 'access-label '-)))
