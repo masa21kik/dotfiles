@@ -11,6 +11,7 @@ def format_line(l)
   s.gsub!(/else\{/, 'else {')
   s.gsub!(/\(\s+/, '(')
   s.gsub!(/ +\)/, ')')
+  s.gsub!(/\s\[/, '[')
   s.gsub!(/\[\s+/, '[')
   s.gsub!(/\s+\]/, ']')
   s.gsub!(/\)\{/, ') {')
@@ -24,6 +25,8 @@ def format_line(l)
   s.gsub!(/(\&\&|\|\|)([^ ])/, '\1 \2')
   s.gsub!(/([^\s=!<>\|\+\-\*\/\&\^])=/, '\1 =') unless s =~ /'[^=]*=[^=]*'|"[^=]*=[^=]*"/
   s.gsub!(/=([^\s=])/, '= \1') unless s =~ /'[^=]*=[^=]*'|"[^=]*=[^=]*"/
+  s.gsub!(/([^\s])\{/, '\1 {')
+  s.gsub!(/\}([^\s,;])/, '} \1')
   s
 end
 
@@ -33,7 +36,8 @@ def format_code(code)
     s << format_line(l)
     s << "\n"
   end
-  s.gsub!(/(\n[^\/]+)\)\n\s*\{/, '\1) {')
+  s.gsub!(/(\n[^\/\n]+)\)\n\s*\{/, '\1) {')
+  s.gsub!(/(\n[^\/\n]+ const)\n\s*\{/, '\1 {')
   s.gsub!(/\n\n\n/, "\n\n")
   # s.gsub!(/\n\s*\)/m, ')')
   s.gsub!(/\n(\n[ \t]*)\}/, '\1}')
