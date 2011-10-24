@@ -7,6 +7,7 @@ def format_line(l)
   %w{if for while switch do}.each do |c|
     s.gsub!(/#{c}\(/, "#{c} (")
   end
+  s.gsub!(/\/\/!</, '//')
   s.gsub!(/\}else/, '} else')
   s.gsub!(/else\{/, 'else {')
   s.gsub!(/\(\s+/, '(')
@@ -38,6 +39,7 @@ def format_code(code)
   end
   s.gsub!(/(\n[^\/\n]+)\)\n\s*\{/, '\1) {')
   s.gsub!(/(\n[^\/\n]+ const)\n\s*\{/, '\1 {')
+  s.gsub!(/(\n[^\/\n]+ struct)\n\s*\{/, '\1 {')
   s.gsub!(/\n\n\n/, "\n\n")
   # s.gsub!(/\n\s*\)/m, ')')
   s.gsub!(/\n(\n[ \t]*)\}/, '\1}')
