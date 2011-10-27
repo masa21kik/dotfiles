@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-10-15 13:56:41 kikuchi>
+;; Time-stamp: <2011-10-27 14:28:39 kikuchi>
 ;;
 ;;==============================================================
 
@@ -143,6 +143,7 @@
                 ("\\.js$" . javascript-mode)
                 ("\\.py$" . python-mode)
                 ("scons" . python-mode)
+                ("SConstruct" . python-mode)
 				(".emacs" . emacs-lisp-mode)
 				(".mule" . emacs-lisp-mode)
 				) auto-mode-alist))
