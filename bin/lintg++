@@ -3,15 +3,21 @@
 src_files = ARGV.select{|e| e =~ /\.(c|cc|cpp|h)\z/}
 compiler = nil
 
+exit_code = 0
+
 case $0
 when /lintg\+\+\z/
-  `cpplint #{src_files.join(' ')}`
+  exit_code = 1 unless system("cpplint #{src_files.join(' ')}")
   compiler = ARGV.select{|e| e =~ /\ACXX=(.+)/}.empty? ? "g++" : $1
   ARGV.delete_if{|e| e =~ /\ACXX=/}
 when /lintgcc\z/
-  `clint #{src_files.join(' ')}`
+  exit_code = 1 unless system("clint #{src_files.join(' ')}")
   compiler = ARGV.select{|e| e =~ /\ACC=(.+)/}.empty? ? "gcc" : $1
   ARGV.delete_if{|e| e =~ /\ACC=/}
 end
 
-`#{compiler} #{ARGV.join(' ')}` if compiler
+if compiler
+  exit_code = 1 unless system("#{compiler} #{ARGV.join(' ')}")
+end
+
+exit(exit_code)

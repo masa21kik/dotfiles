@@ -14,4 +14,6 @@ end
 puts files
 
 dir = File.dirname(File.expand_path(__FILE__))
-`python #{dir}/cpplint.py --filter=#{opts.join(',')} #{files.join(' ')}`
+ret = system("python #{dir}/cpplint.py --filter=#{opts.join(',')} #{files.join(' ')}")
+exit_code = ret ? 0 : 1
+exit(exit_code)
