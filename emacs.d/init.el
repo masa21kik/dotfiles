@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2011-10-27 14:28:39 kikuchi>
+;; Time-stamp: <2012-04-24 15:29:16 kikuchi>
 ;;
 ;;==============================================================
 
@@ -166,7 +166,7 @@
 (require 'google-c-style)
 (add-hook 'c++-mode-hook
 		  '(lambda ()
-			 (setq indent-tabs-mode t)
+			 ;; (setq indent-tabs-mode t)
 			 (setq tab-width 4)
 			 (setq c-basic-offset tab-width)
 			 (c-set-offset 'inextern-lang 0)
