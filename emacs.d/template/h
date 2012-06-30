@@ -1,0 +1,8 @@
+#ifndef %include-guard%
+#define %include-guard%
+
+namespace %namespace% {
+
+}  // namespace %namespace%
+
+#endif  // %include-guard%
