@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-default_opts = %w{-whitespace/labels -whitespace/tab -legal/copyright}
+default_opts = %w{-whitespace/labels -build/header_guard -build/include}
 optstrs = ARGV.select{|a| a =~ /\A-|\A\+/}
 additional_opts = optstrs.map{|a| a.split(/,/)}.flatten
 files = ARGV - optstrs
