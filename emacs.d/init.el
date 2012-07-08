@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2012-06-30 15:31:19 kikuchi>
+;; Time-stamp: <2012-07-08 16:55:48 kikuchi>
 ;;
 ;;==============================================================
 
@@ -278,15 +278,16 @@
 
 (defun my-c-template ()
   (time-stamp)
-  (nconc template-replacements-alists
-		'(("%commentout%" . (lambda () #("//")))))
+  (setq copy-replacements-alists (copy-alist template-replacements-alists))
+  (nconc copy-replacements-alists
+		 '(("%commentout%" . (lambda () #("//")))))
   (if (file-readable-p "~/local/template/copyright.txt")
 	  (insert-file-contents "~/local/template/copyright.txt"))
   (mapc #'(lambda(c)
 			(progn
 			  (goto-char (point-min))
 			  (replace-string (car c) (funcall (cdr c)) nil)))
-		template-replacements-alists)
+		copy-replacements-alists)
   (goto-char (point-max))
   (message "done."))
 
@@ -311,3 +312,4 @@
 ;;;
 ;;; end of file
 ;;;
+(put 'downcase-region 'disabled nil)
