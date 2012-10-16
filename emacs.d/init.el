@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2012-10-16 13:23:00 kikuchi>
+;; Time-stamp: <2012-10-16 13:50:10 kikuchi>
 ;;
 ;;==============================================================
 
@@ -45,7 +45,7 @@
 (column-number-mode t)
 
 ;; タブ幅を 4 に設定
-(setq-default tab-width 4)
+(setq-default tab-width 4 indent-tabs-mode nil)
 
 ;; 同一名の file を開いた時に区別出来る様にする。
 (require 'uniquify)
@@ -103,8 +103,8 @@
 (global-set-key "\C-h" 'backward-delete-char)          ;C-h を BS にする
 (global-set-key "\C-m" 'newline-and-indent)            ;改行キー(C-m)でオートインデント
 ;; home end キーでの移動
-(global-set-key [end]  'end-of-buffer )
-(global-set-key [home] 'beginning-of-buffer )
+(global-set-key [end]  'end-of-buffer)
+(global-set-key [home] 'beginning-of-buffer)
 ;; compile set-up (make)
 ;; (define-key esc-map "m" 'compile)
 (define-key esc-map "k" 'kill-compilation)
@@ -112,6 +112,8 @@
 ;; カーソル行の単語をコピー，grep
 (ffap-bindings)
 (global-set-key "\M-c" 'ffap-copy-string-as-kill)
+;; indent
+(global-set-key "\M-_" 'indent-region)
 
 (defun grep-find-current-word ()
   (interactive)
