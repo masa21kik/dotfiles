@@ -7,3 +7,6 @@
 [submodule "emacs.d/yasnippet/yasnippets-rails"]
 	path = emacs.d/yasnippet/yasnippets-rails
 	url = https://github.com/eschulte/yasnippets-rails.git
+[submodule "emacs.d/elisp/js2-mode"]
+	path = emacs.d/elisp/js2-mode
+	url = https://github.com/mooz/js2-mode.git

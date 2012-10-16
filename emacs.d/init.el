@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2012-07-08 16:55:48 kikuchi>
+;; Time-stamp: <2012-10-16 11:13:57 kikuchi>
 ;;
 ;;==============================================================
 
@@ -26,6 +26,7 @@
 		(expand-file-name "~/.emacs.d/elisp/")
 		(expand-file-name "~/.emacs.d/elisp/rinari")
 		(expand-file-name "~/.emacs.d/elisp/rhtml")
+		(expand-file-name "~/.emacs.d/elisp/js2-mode")
 		)
        load-path))
 
@@ -140,7 +141,8 @@
                 ("\\.erb$" . rhtml-mode)
                 ("\\.html$" . html-mode)
                 ("\\.yaml$" . yaml-mode)
-                ("\\.js$" . javascript-mode)
+                ("\\.js$" . js2-mode)
+                ("\\.json$" . js2-mode)
                 ("\\.py$" . python-mode)
                 ("scons" . python-mode)
                 ("SConstruct" . python-mode)
@@ -228,6 +230,11 @@
 			 (define-key yaml-mode-map "\C-m" 'newline-and-indent))
 		  '(lambda ()
 			 (setq tab-width 4)))
+
+;;=========================================
+;; js2-mode
+;;=========================================
+(require 'js2-mode)
 
 ;;=========================================
 ;; changelog-mode
