@@ -10,3 +10,6 @@
 [submodule "emacs.d/elisp/js2-mode"]
 	path = emacs.d/elisp/js2-mode
 	url = https://github.com/mooz/js2-mode.git
+[submodule "emacs.d/elisp/web-mode"]
+	path = emacs.d/elisp/web-mode
+	url = https://github.com/fxbois/web-mode.git

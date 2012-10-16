@@ -3,7 +3,7 @@
 ;;
 ;; .emacs by kikuchi
 ;;
-;; Time-stamp: <2012-10-16 11:13:57 kikuchi>
+;; Time-stamp: <2012-10-16 13:23:00 kikuchi>
 ;;
 ;;==============================================================
 
@@ -27,6 +27,7 @@
 		(expand-file-name "~/.emacs.d/elisp/rinari")
 		(expand-file-name "~/.emacs.d/elisp/rhtml")
 		(expand-file-name "~/.emacs.d/elisp/js2-mode")
+		(expand-file-name "~/.emacs.d/elisp/web-mode")
 		)
        load-path))
 
@@ -139,7 +140,7 @@
                 ("\\.h$" . c++-mode)
                 ("\\.rb$" . ruby-mode)
                 ("\\.erb$" . rhtml-mode)
-                ("\\.html$" . html-mode)
+                ("\\.html$" . web-mode)
                 ("\\.yaml$" . yaml-mode)
                 ("\\.js$" . js2-mode)
                 ("\\.json$" . js2-mode)
@@ -237,6 +238,26 @@
 (require 'js2-mode)
 
 ;;=========================================
+;; web-mode
+;;=========================================
+(require 'web-mode)
+
+;;; emacs 23以下の互換
+(when (< emacs-major-version 24)
+  (defalias 'prog-mode 'fundamental-mode))
+
+;;; インデント数
+(defun web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-html-offset   2)
+  (setq web-mode-css-offset    2)
+  (setq web-mode-script-offset 2)
+  (setq web-mode-php-offset    2)
+  (setq web-mode-java-offset   2)
+  (setq web-mode-asp-offset    2))
+(add-hook 'web-mode-hook 'web-mode-hook)
+
+;;=========================================
 ;; changelog-mode
 ;;=========================================
 ;; メモファイルを自動的に開いて日付入力
@@ -271,7 +292,7 @@
 				("\\.h$"    . ["h" my-c-template])
 				(c++-mode   . ["c" my-c-template])
 				(text-mode  . "txt")
-				(html-mode  . "html")
+				(web-mode  . "html")
 				(makefile-mode . "makefile")
 				) auto-insert-alist))
 
