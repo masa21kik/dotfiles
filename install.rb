@@ -15,6 +15,7 @@ dot_installs = [
                 'emacs.d',
                 'screenrc',
                 'irbrc',
+                'tmux.conf',
                ]
 local_installs = [
                   'bin',
