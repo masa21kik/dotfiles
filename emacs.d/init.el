@@ -73,6 +73,10 @@
 ;;; ガベージコレクションの頻度を下げて高速化(デフォルトは 400000)
 ;(setq gc-cons-threshold 5242880)
 
+;; 大文字化[C-x C-u]，小文字化[C-x C-l]の時，問い合わせなしで実行
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;;;=====================================
 ;; color
 ;;;=====================================
@@ -337,7 +341,7 @@
 	(load "~/.emacs.d/emacs.meadow.el")
   (load "~/.emacs.d/emacs.linux.el")
   )
+
 ;;;
 ;;; end of file
 ;;;
-(put 'downcase-region 'disabled nil)
