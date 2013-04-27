@@ -17,17 +17,11 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (setq file-name-coding-system   'utf-8)
 
-;; ~/.emacs.d/elisp を load-path の先頭に加える
-(setq load-path
-      (append
-       (list
-		(expand-file-name "~/.emacs.d/elisp/")
-		(expand-file-name "~/.emacs.d/elisp/rinari")
-		(expand-file-name "~/.emacs.d/elisp/rhtml")
-		(expand-file-name "~/.emacs.d/elisp/js2-mode")
-		(expand-file-name "~/.emacs.d/elisp/web-mode")
-		)
-       load-path))
+;; ELPA設定
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
@@ -269,10 +263,10 @@
 ;;;====================================
 ;; yasnippet
 ;;;====================================
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet/snippets")
-(yas/load-directory "~/.emacs.d/yasnippet/yasnippets-rails/rails-snippets")
+(require 'yasnippet-bundle)
+;; (yas/initialize)
+;; (yas/load-directory "~/.emacs.d/yasnippet/snippets")
+;; (yas/load-directory "~/.emacs.d/yasnippet/yasnippets-rails/rails-snippets")
 (setq yas/global-mode t)
 
 ;;=========================================
