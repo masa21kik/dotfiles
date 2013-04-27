@@ -136,24 +136,20 @@
 ;;; auto-mode
 ;;;=====================================
 (setq auto-mode-alist
-      (append '(("makefile$"  . makefile-mode)
-                ("Makefile$" . makefile-mode)
+      (append '(("\\(m\\|M\\)akefile$"  . makefile-mode)
                 ("\\.mk$" . makefile-mode)
-                ("\\.cpp$" . c++-mode)
-                ("\\.c$" . c++-mode)
-                ("\\.h$" . c++-mode)
-                ("\\.rb$" . ruby-mode)
+                ("\\.\\(cpp\\|hpp\\|c\\|h\\)$" . c++-mode)
+                ("\\.\\(rb\\|ru\\)$" . ruby-mode)
+                ("\\(Rakefile\\|Gemfile\\|Capfile\\)" . ruby-mode)
                 ("\\.erb$" . rhtml-mode)
                 ("\\.html$" . web-mode)
                 ("\\.yaml$" . yaml-mode)
-                ("\\.js$" . js2-mode)
-                ("\\.json$" . js2-mode)
+                ("\\.\\(js\\|json\\)$" . js2-mode)
                 ("\\.py$" . python-mode)
                 ("scons" . python-mode)
                 ("SConstruct" . python-mode)
-				(".emacs" . emacs-lisp-mode)
-				(".mule" . emacs-lisp-mode)
-				) auto-mode-alist))
+                ("\\.\\(emacs\\|mule\\)" . emacs-lisp-mode)
+                ) auto-mode-alist))
 
 ;;;====================================
 ;; C-mode
@@ -189,33 +185,31 @@
 ;;=========================================
 (add-hook 'ruby-mode-hook
           '(lambda ()
-			 (setq tab-width 2)
-			 (setq indent-tabs-mode 'nil)
-			 (setq ruby-indent-level tab-width)
-			 )
-		  )
-;; ruby-electric.el
-(require 'ruby-electric)
-(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
-;;; '{'の後の'|'はスペースなしでも補完するようにする
-(defconst ruby-electric-expandable-bar
-  "\\(\\s-do\\|{\\)\\s-*|")
-;;; '{'の後にスペースを挿入しない
-(defun ruby-electric-curlies(arg)
-  (interactive "P")
-  (self-insert-command (prefix-numeric-value arg))
-  (if (ruby-electric-is-last-command-char-expandable-punct-p)
-      (cond ((ruby-electric-code-at-point-p)
-             (save-excursion
-               (if ruby-electric-newline-before-closing-bracket
-                   (newline))
-               (insert "}")))
-            ((ruby-electric-string-at-point-p)
-             (save-excursion
-               (backward-char 1)
-               (when (char-equal ?\# (preceding-char))
-                 (forward-char 1)
-                 (insert "}")))))))
+             (setq tab-width 2)
+             (setq indent-tabs-mode 'nil)
+             (setq ruby-indent-level tab-width)
+             (setq ruby-deep-indent-paren nil)
+             (setq ruby-deep-indent-paren-style nil)
+             (setq ruby-deep-arglist nil)
+             )
+          )
+
+;; 閉じ括弧のインデントを修正する設定
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
+
 ;; rinari.el for Rails
 (require 'rinari)
 
