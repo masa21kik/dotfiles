@@ -209,6 +209,18 @@
 (require 'rinari)
 
 ;;=========================================
+;; rspec-mode
+;;=========================================
+(require 'rspec-mode)
+(custom-set-variables '(rspec-use-rake-flag nil))
+(global-set-key [f10] 'rspec-verify-single)
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+(ad-activate 'rspec-compile)
+
+;;=========================================
 ;; rhtml-mode
 ;;=========================================
 (require 'rhtml-mode)
