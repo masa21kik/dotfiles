@@ -142,6 +142,7 @@
                 ("\\.py$" . python-mode)
                 ("scons" . python-mode)
                 ("SConstruct" . python-mode)
+                ("\\.\\(md\\|markdown\\)$" . markdown-mode)
                 ("\\.\\(emacs\\|mule\\)" . emacs-lisp-mode)
                 ) auto-mode-alist))
 
