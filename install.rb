@@ -2,19 +2,15 @@
 # -*- mode: ruby; coding: utf-8 -*-
 require 'fileutils'
 
+def exec_cmd(cmd)
+  puts cmd
+  system(cmd)
+end
+
 pwd = File.expand_path(File.dirname(__FILE__))
-dot_installs = [
-                'zsh.d',
-                'zshrc',
-                'zshenv',
-                'emacs.d',
-                'screenrc',
-                'irbrc',
-                'tmux.conf',
-               ]
-local_installs = [
-                  'bin',
-                 ]
+dot_installs = %w(zsh.d zshrc zshenv emacs.d
+                screenrc irbrc tmux.conf)
+local_installs = %w(bin)
 
 dot_installs.each do |f|
   target = File.expand_path("~/.#{f}")
@@ -22,9 +18,7 @@ dot_installs.each do |f|
     puts "#{target} already exist. skipped"
     next
   end
-  cmd = "ln -s #{pwd}/#{f} ~/.#{f}"
-  puts cmd
-  system(cmd)
+  exec_cmd("ln -s #{pwd}/#{f} ~/.#{f}")
 end
 
 local_installs.each do |dir|
@@ -37,21 +31,9 @@ local_installs.each do |dir|
       puts "#{target} already exist. skippd"
       next
     end
-    cmd = "ln -s #{pwd}/#{dir}/#{f} #{target}"
-    puts cmd
-    system(cmd)
+    exec_cmd("ln -s #{pwd}/#{dir}/#{f} #{target}")
   }
 end
 
-# local_installs.each do |f|
-#   target_dir = File.expand_path("~/local/#{f}")
-#   Dir.mkdir(target_dir) unless File.exists?(target_dir)
-#   target = "#{target_dir}/#{f}"
-#   if File.exists?(target)
-#     puts "#{target} already exist. skippd"
-#     next
-#   end
-#   cmd = "ln -s #{pwd}/#{f} #{target}"
-#   puts cmd
-#   system(cmd)
-# end
+# emacs packages install
+exec_cmd("emacs --batch -l emacs.d/prelude-packages.el")
