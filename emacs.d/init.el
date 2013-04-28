@@ -277,10 +277,12 @@
 ;; yasnippet
 ;;;====================================
 (require 'yasnippet-bundle)
-;; (yas/initialize)
-;; (yas/load-directory "~/.emacs.d/yasnippet/snippets")
-;; (yas/load-directory "~/.emacs.d/yasnippet/yasnippets-rails/rails-snippets")
 (setq yas/global-mode t)
+
+;;;====================================
+;; git-gutter
+;;;====================================
+(global-git-gutter-mode t)
 
 ;;=========================================
 ;; テンプレート

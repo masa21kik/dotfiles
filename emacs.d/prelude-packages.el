@@ -7,7 +7,8 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(google-c-style
+  '(git-gutter
+    google-c-style
     inf-ruby
     inflections
     js2-mode
