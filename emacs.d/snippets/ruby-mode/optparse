@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: optparse
+# --
+require 'optparse'
+
+opt = OptionParser.new
+opt.on('-$1', '--$2', '${3:description}'){|v|
+  $4
+}
+opt.parse!(ARGV)
+abort(opt.help)$0
