@@ -34,6 +34,3 @@ local_installs.each do |dir|
     exec_cmd("ln -s #{pwd}/#{dir}/#{f} #{target}")
   }
 end
-
-# emacs packages install
-exec_cmd("emacs --batch -l emacs.d/prelude-packages.el")
