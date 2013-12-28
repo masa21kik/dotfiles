@@ -7,6 +7,7 @@
 (defvar installing-el-get-package-list
   '(
     js2-mode
+    whitespace
     )
   "A list of packages to install from el-get at launch.")
 

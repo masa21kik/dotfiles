@@ -42,9 +42,6 @@
 ;; mouse で paste する際、mouse の位置ではなく cursor の位置に paste する。
 (setq mouse-yank-at-point t)
 
-;; 行末の空白を表示
-(setq-default show-trailing-whitespace t)
-
 ;; バックアップファイルを作らない
 (setq backup-inhibited t)
 ;; 終了時にオートセーブファイルを消す
