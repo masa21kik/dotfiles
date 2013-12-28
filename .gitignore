@@ -2,4 +2,5 @@
 /zsh.d/config/
 /emacs.d/auto-save-list/
 /emacs.d/elisp/
+/emacs.d/ac-comphist.dat
 *.bak
