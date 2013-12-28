@@ -63,6 +63,6 @@
 ;; 領域指定の色指定
 (set-face-background 'region "dark slate gray")
 (set-face-foreground 'region "moccasin")
-(set-face-bold-p 'modeline nil)
+;; (set-face-bold-p 'modeline nil)
 (transient-mark-mode t)
 (show-paren-mode 1)
