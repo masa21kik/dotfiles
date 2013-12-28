@@ -26,6 +26,7 @@
     popwin
     helm
     auto-complete
+    yasnippet
     )
   "A list of packages to install from MELPA at launch.")
 
