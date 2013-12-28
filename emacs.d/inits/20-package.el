@@ -22,6 +22,9 @@
     rinari
     git-gutter
     smart-compile
+
+    popwin
+    helm
     )
   "A list of packages to install from MELPA at launch.")
 
