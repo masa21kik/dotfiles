@@ -13,6 +13,7 @@
       (append '((find-file . nil)
                 (find-file-at-point . nil)
                 (write-file . nil)
+                (basic-save-buffer . nil)
                 )))
 
 ;; C-hで一文字削除になるように
