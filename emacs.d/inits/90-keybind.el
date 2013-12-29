@@ -6,7 +6,7 @@
 (define-key esc-map "g" 'goto-line)                    ;カーソルの移動
 (define-key esc-map "l" 'what-line)                    ;カーソルの位置
 ;; Ctrl-x "key"
-(define-key ctl-x-map "x" 'comment-region)             ;コメントアウト
+(define-key ctl-x-map "c" 'comment-region)             ;コメントアウト
 (define-key ctl-x-map "v" 'uncomment-region)           ;コメントイン
 ;; \CはCtrl
 (global-set-key "\C-o" 'scroll-down)                   ;スクロールダウン
