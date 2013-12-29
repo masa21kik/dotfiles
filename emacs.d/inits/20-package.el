@@ -27,6 +27,7 @@
     helm
     auto-complete
     yasnippet
+    flycheck
     )
   "A list of packages to install from MELPA at launch.")
 
