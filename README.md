@@ -1,4 +1,4 @@
-# linux_conf
+# dotfiles
 ## 概要
 
 Linuxでの自分用環境設定ファイルのインストールスクリプト．
@@ -7,10 +7,10 @@ Linuxでの自分用環境設定ファイルのインストールスクリプト
 
 ## 使い方
 
-    $ git clone https://github.com/masa21kik/linux_conf.git
-    $ cd linux_conf.git
+    $ git clone https://github.com/masa21kik/dotfiles.git
+    $ cd dotfiles.git
     $ ./install.rb
 
 上記コマンドで~/ 以下に .zshrc .zshenv .screenrc .emacs .irbrc  と ~/local/bin にlintツールをインストールします．
-これらはlinux_conf以下のファイルへのシンボリックリンクとしてインストールされます．
+これらはdotfiles以下のファイルへのシンボリックリンクとしてインストールされます．
 そのため同名ファイルがある場合はあらかじめ削除しておく必要があります．
