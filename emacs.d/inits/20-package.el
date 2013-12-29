@@ -28,6 +28,7 @@
     auto-complete
     yasnippet
     flycheck
+    magit
     )
   "A list of packages to install from MELPA at launch.")
 
