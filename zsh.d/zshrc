@@ -227,6 +227,8 @@ setopt extended_glob
 ## globでパスを生成したときに、パスがディレクトリだったら最後に「/」をつける。
 setopt mark_dirs
 
+## no match foundの警告を抑制
+setopt nonomatch
 
 # ジョブ
 ## jobsでプロセスIDも出力する。
@@ -246,7 +248,6 @@ REPORTTIME=3
 
 ## ^Dでログアウトしないようにする。
 setopt ignore_eof
-
 
 # 単語
 ## 「/」も単語区切りとみなす。
