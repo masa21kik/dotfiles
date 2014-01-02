@@ -29,6 +29,10 @@
     yasnippet
     flycheck
     magit
+
+    expand-region
+    smartrep
+    multiple-cursors
     )
   "A list of packages to install from MELPA at launch.")
 
