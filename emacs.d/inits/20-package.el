@@ -33,6 +33,7 @@
     expand-region
     smartrep
     multiple-cursors
+    highlight-symbol
     )
   "A list of packages to install from MELPA at launch.")
 
