@@ -8,6 +8,7 @@
     st = status
     co = checkout
     tr = log --graph --pretty='format:%C(yellow)%h%Creset %C(magenta)%cd%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset' --date=iso
+    pull-dry-run = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
 [core]
     excludefile = ~/.gitignore
 [push]
