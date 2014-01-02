@@ -34,6 +34,7 @@
     smartrep
     multiple-cursors
     highlight-symbol
+    anzu
     )
   "A list of packages to install from MELPA at launch.")
 
