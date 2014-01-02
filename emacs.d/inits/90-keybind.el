@@ -3,27 +3,27 @@
 ;; キーの割り付け
 ;;;=====================================
 ;; ESC-"key"
-(define-key esc-map "g" 'goto-line)                    ;カーソルの移動
-(define-key esc-map "l" 'what-line)                    ;カーソルの位置
+(global-set-key (kbd "M-g") 'goto-line)                    ;カーソルの移動
+(global-set-key (kbd "M-l") 'what-line)                    ;カーソルの位置
 ;; Ctrl-x "key"
-(define-key ctl-x-map "c" 'comment-region)             ;コメントアウト
-(define-key ctl-x-map "v" 'uncomment-region)           ;コメントイン
+(global-set-key (kbd "C-x c") 'comment-region)             ;コメントアウト
+(global-set-key (kbd "C-x v") 'uncomment-region)           ;コメントイン
 ;; \CはCtrl
-(global-set-key "\C-o" 'scroll-down)                   ;スクロールダウン
-(global-set-key "\C-h" 'backward-delete-char)          ;C-h を BS にする
-(global-set-key "\C-m" 'newline-and-indent)            ;改行キー(C-m)でオートインデント
+(global-set-key (kbd "C-o") 'scroll-down)                   ;スクロールダウン
+(global-set-key (kbd "C-h") 'backward-delete-char)          ;C-h を BS にする
+(global-set-key (kbd "C-m") 'newline-and-indent)            ;改行キー(C-m)でオートインデント
 ;; home end キーでの移動
-(global-set-key [end]  'end-of-buffer)
-(global-set-key [home] 'beginning-of-buffer)
+(global-set-key (kbd "<end>") 'end-of-buffer)
+(global-set-key (kbd "<home>") 'beginning-of-buffer)
 ;; compile set-up (make)
-;; (define-key esc-map "m" 'compile)
-(define-key esc-map "k" 'kill-compilation)
+;; (global-set-key (kbd "M-m") 'compile)
+(global-set-key (kbd "M-k") 'kill-compilation)
 (setq compile-command "make ")
 ;; カーソル行の単語をコピー，grep
 (ffap-bindings)
-(global-set-key "\M-c" 'ffap-copy-string-as-kill)
+(global-set-key (kbd "M-c") 'ffap-copy-string-as-kill)
 ;; indent
-(global-set-key "\M-_" 'indent-region)
+(global-set-key (kbd "M-_") 'indent-region)
 
 ;; ESC 連打で無効化
 (global-set-key (kbd "M-ESC ESC") 'keyboard-quit)
@@ -38,5 +38,5 @@
     (ffap-copy-string-as-kill)
     (grep-find (format "%s %s"
                        command (car kill-ring)))))
-(define-key global-map "\C-cG" 'grep-find-current-word)
+(global-set-key (kbd "C-c G") 'grep-find-current-word)
 
