@@ -17,6 +17,7 @@
                 ("SConstruct" . python-mode)
                 ("\\.\\(md\\|markdown\\)$" . markdown-mode)
                 ("\\.\\(emacs\\|mule\\)" . emacs-lisp-mode)
+                ("\\.\\slim" . slim-mode)
                 ) auto-mode-alist))
 
 ;;;====================================

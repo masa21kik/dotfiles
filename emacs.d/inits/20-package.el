@@ -16,6 +16,7 @@
     rspec-mode
     yaml-mode
     web-mode
+    slim-mode
 
     google-c-style
 
