@@ -286,12 +286,16 @@ alias screen='screen -D -RR'
 case $(uname) in
 	*BSD|Darwin)
 	if [ -x "$(which gnuls)" ]; then
-		alias ls="gnuls"
-		alias la="ls -lhAF --color=auto"
+		alias ls="gnuls --color=auto"
+		alias ll="ls -l"
+		alias la="ls -AF"
 	else
-		alias la="ls -lhAFG"
+		alias ls="ls -G"
+		alias ll="ls -l"
+		alias la="ls -A"
 	fi
 	alias ps="ps -fU$(whoami)"
+	alias zcat="gzcat"
 	;;
 	SunOS)
 	if [ -x "`which gls`" ]; then
