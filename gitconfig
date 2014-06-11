@@ -7,9 +7,19 @@
     ci = commit
     st = status
     co = checkout
+    s = status --branch --short
+    d = diff
+    g = grep --line-number --show-function --color --heading --break
+    ls = ls-files
+    l = log --decorate
+    lp = log --decorate --stat --patch
+    gsub = git-gsub
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
     tr = log --graph --pretty='format:%C(yellow)%h%Creset %C(magenta)%cd%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset' --date=iso
     pull-dry-run = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
 [core]
     excludefile = ~/.gitignore
 [push]
-    default = simple
+    default = current
