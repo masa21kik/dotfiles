@@ -12,10 +12,10 @@ package-run-command()
 {
     "$@"
     if test $? -eq 0; then
-	return 0
+    return 0
     else
-	echo "Failed: $@"
-	return 1
+    echo "Failed: $@"
+    return 1
     fi
 }
 
@@ -35,14 +35,14 @@ package-install()
     local package_dir="$(package-directory $spec)"
 
     if [ ! -d "${package_dir}" ]; then
-	mkdir -p "${package_dir}"
-	case "${type}" in
-	    github)
-		package-install-github "${spec}" "${package_dir}"
-		;;
-	    *)
-		return
-		;;
-	esac
+    mkdir -p "${package_dir}"
+    case "${type}" in
+        github)
+        package-install-github "${spec}" "${package_dir}"
+        ;;
+        *)
+        return
+        ;;
+    esac
     fi
 }

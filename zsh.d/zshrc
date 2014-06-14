@@ -56,33 +56,33 @@ setopt prompt_percent
 ### blue: 0-5
 color256()
 {
-	local red=$1; shift
-	local green=$2; shift
-	local blue=$3; shift
+    local red=$1; shift
+    local green=$2; shift
+    local blue=$3; shift
 
-	echo -n $[$red * 36 + $green * 6 + $blue + 16]
+    echo -n $[$red * 36 + $green * 6 + $blue + 16]
 }
 
 fg256()
 {
-	echo -n $'\e[38;5;'$(color256 "$@")"m"
+    echo -n $'\e[38;5;'$(color256 "$@")"m"
 }
 
 bg256()
 {
-	echo -n $'\e[48;5;'$(color256 "$@")"m"
+    echo -n $'\e[48;5;'$(color256 "$@")"m"
 }
 
 ## プロンプトの作成
 ### ↓のようにする。
-###   [user@debian](1)															[~]
+###   [user@debian](1)                                                            [~]
 
 ## バージョン管理システムの情報も表示する
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats \
-	'(%s:%b)'
+    '(%s:%b)'
 zstyle ':vcs_info:*' actionformats \
-	'(%s:%b)|%a'
+    '(%s:%b)|%a'
 
 ### プロンプトバーの左側
 ###   %{%B%}...%{%b%}: 「...」を太字にする。
@@ -90,15 +90,15 @@ zstyle ':vcs_info:*' actionformats \
 ###   %n: ユーザ名
 ###   %m: ホスト名（完全なホスト名ではなくて短いホスト名）
 ###   %{%B%F{white}%(?.%K{green}.%K{red})%}%?%{%f%k%b%}:
-###						   最後に実行したコマンドが正常終了していれば
-###						   太字で白文字で緑背景にして異常終了していれば
-###						   太字で白文字で赤背景にする。
+###                           最後に実行したコマンドが正常終了していれば
+###                           太字で白文字で緑背景にして異常終了していれば
+###                           太字で白文字で赤背景にする。
 ###   %{%F{white}%}: 白文字にする。
-###	 %(x.true-text.false-text): xが真のときはtrue-textになり
-###								偽のときはfalse-textになる。
-###	   ?: 最後に実行したコマンドの終了ステータスが0のときに真になる。
-###	   %K{green}: 緑景色にする。
-###	   %K{red}: 赤景色を赤にする。
+###     %(x.true-text.false-text): xが真のときはtrue-textになり
+###                                偽のときはfalse-textになる。
+###       ?: 最後に実行したコマンドの終了ステータスが0のときに真になる。
+###       %K{green}: 緑景色にする。
+###       %K{red}: 赤景色を赤にする。
 ###   %?: 最後に実行したコマンドの終了ステータス
 ###   %{%k%}: 背景色を元に戻す。
 ###   %{%f%}: 文字の色を元に戻す。
@@ -110,14 +110,14 @@ prompt_bar_left_self="[%n%{%F{cyan}%}@%{%f%}%m]"
 prompt_bar_left="${prompt_bar_left_self}"
 ### プロンプトバーの右側
 ###   %{%B%K{magenta}%F{white}%}...%{%f%k%b%}:
-###	   「...」を太字のマジェンタ背景の白文字にする。
+###       「...」を太字のマジェンタ背景の白文字にする。
 ###   %d: カレントディレクトリのフルパス（省略しない）
 # prompt_bar_right="-[%{%B%K{magenta}%F{white}%}%d%{%f%k%b%}]-"
 
 ### 2行目左にでるプロンプト。
 ###   %h: ヒストリ数。
 ###   %(1j,(%j),): 実行中のジョブ数が1つ以上ある場合だけ「(%j)」を表示。
-###	 %j: 実行中のジョブ数。
+###     %j: 実行中のジョブ数。
 ###   %{%B%}...%{%b%}: 「...」を太字にする。
 ###   %#: 一般ユーザなら「%」、rootユーザなら「#」になる。
 prompt_left="%(1j,(%j),)"' %(!.#.$) '$DEFAULT
@@ -126,35 +126,35 @@ prompt_left="%(1j,(%j),)"' %(!.#.$) '$DEFAULT
 ## 日本語未対応。
 count_prompt_characters()
 {
-	# print:
-	#   -P: プロンプトフォーマットを展開する。
-	#   -n: 改行をつけない。
-	# sed:
-	#   -e $'s/\e\[[0-9;]*m//g': ANSIエスケープシーケンスを削除。
-	# wc:
-	#   -c: 文字数を出力する。
-	# sed:
-	#   -e 's/ //g': *BSDやMac OS Xのwcは数字の前に空白を出力するので削除する。
-	print -n -P -- "$1" | sed -e $'s/\e\[[0-9;]*m//g' | wc -m | sed -e 's/ //g'
+    # print:
+    #   -P: プロンプトフォーマットを展開する。
+    #   -n: 改行をつけない。
+    # sed:
+    #   -e $'s/\e\[[0-9;]*m//g': ANSIエスケープシーケンスを削除。
+    # wc:
+    #   -c: 文字数を出力する。
+    # sed:
+    #   -e 's/ //g': *BSDやMac OS Xのwcは数字の前に空白を出力するので削除する。
+    print -n -P -- "$1" | sed -e $'s/\e\[[0-9;]*m//g' | wc -m | sed -e 's/ //g'
 }
 
 ## プロンプトを更新する。
 update_prompt()
 {
-	local bar_left="$prompt_bar_left"
+    local bar_left="$prompt_bar_left"
 
-	# 左プロンプトを設定
-	PROMPT="${bar_left}${prompt_left}"
-	# 右プロンプト
-	#   %~: カレントディレクトリのフルパス（可能なら「~」で省略する）
-	RPROMPT="%{%B%F{green}%}[%~]%{%f%b%}"
+    # 左プロンプトを設定
+    PROMPT="${bar_left}${prompt_left}"
+    # 右プロンプト
+    #   %~: カレントディレクトリのフルパス（可能なら「~」で省略する）
+    RPROMPT="%{%B%F{green}%}[%~]%{%f%b%}"
 
-	# バージョン管理システムの情報を取得する。
-	LANG=C vcs_info >&/dev/null
-	# バージョン管理システムの情報があったら右プロンプトに表示する。
-	if [ -n "$vcs_info_msg_0_" ]; then
-		RPROMPT="${vcs_info_msg_0_}${RPROMPT}"
-	fi
+    # バージョン管理システムの情報を取得する。
+    LANG=C vcs_info >&/dev/null
+    # バージョン管理システムの情報があったら右プロンプトに表示する。
+    if [ -n "$vcs_info_msg_0_" ]; then
+        RPROMPT="${vcs_info_msg_0_}${RPROMPT}"
+    fi
 }
 
 ## コマンド実行前に呼び出されるフック。
@@ -175,7 +175,7 @@ compinit
 
 ## 補完侯補をメニューから選択する。
 ### select=2: 補完候補を一覧から選択する。
-###		   ただし、補完候補が2つ以上なければすぐに補完する。
+###           ただし、補完候補が2つ以上なければすぐに補完する。
 zstyle ':completion:*:default' menu select=2
 
 ## 補完候補に色を付ける。
@@ -196,7 +196,7 @@ zstyle ':completion:*:default' list-colors ""
 ### _approximate: 似ている補完候補も補完候補とする。
 ### _prefix: カーソル以降を無視してカーソル位置までで補完する。
 # zstyle ':completion:*' completer \
-# 	_oldlist _complete _match _history _ignored _approximate _prefix
+#     _oldlist _complete _match _history _ignored _approximate _prefix
 
 ## 補完候補をキャッシュする。
 # zstyle ':completion:*' use-cache yes
@@ -284,92 +284,92 @@ alias screen='screen -D -RR'
 ### ls: できるだけGNU lsを使う。
 ### ps: 自分関連のプロセスのみ表示。
 case $(uname) in
-	*BSD|Darwin)
-	if [ -x "$(which gnuls)" ]; then
-		alias ls="gnuls --color=auto"
-		alias ll="ls -l"
-		alias la="ls -AF"
-	else
-		alias ls="ls -G"
-		alias ll="ls -l"
-		alias la="ls -A"
-	fi
-	alias ps="ps -fU$(whoami)"
-	alias zcat="gzcat"
-	;;
-	SunOS)
-	if [ -x "`which gls`" ]; then
-		alias ls="gls"
-		alias la="ls -lhAF --color=auto"
-	else
-		alias la="ls -lhAF"
-	fi
-	alias ps="ps -fl -u$(/usr/xpg4/bin/id -un)"
-	;;
-	*)
-	alias ls="ls --color=auto"
-	alias la="ls -a"
-	alias ll="ls -l"
-	;;
+    *BSD|Darwin)
+    if [ -x "$(which gnuls)" ]; then
+        alias ls="gnuls --color=auto"
+        alias ll="ls -l"
+        alias la="ls -AF"
+    else
+        alias ls="ls -G"
+        alias ll="ls -l"
+        alias la="ls -A"
+    fi
+    alias ps="ps -fU$(whoami)"
+    alias zcat="gzcat"
+    ;;
+    SunOS)
+    if [ -x "`which gls`" ]; then
+        alias ls="gls"
+        alias la="ls -lhAF --color=auto"
+    else
+        alias la="ls -lhAF"
+    fi
+    alias ps="ps -fl -u$(/usr/xpg4/bin/id -un)"
+    ;;
+    *)
+    alias ls="ls --color=auto"
+    alias la="ls -a"
+    alias ll="ls -l"
+    ;;
 esac
 
 # ウィンドウタイトル
 ## 実行中のコマンドとユーザ名とホスト名とカレントディレクトリを表示。
 update_title() {
-	local command_line=
-	typeset -a command_line
-	command_line=${(z)2}
-	local command=
-	if [ ${(t)command_line} = "array-local" ]; then
-	command="$command_line[1]"
-	else
-	command="$2"
-	fi
-	print -n -P "\e]2;"
-	echo -n "(${command})"
-	print -n -P " %n@%m:%~\a"
+    local command_line=
+    typeset -a command_line
+    command_line=${(z)2}
+    local command=
+    if [ ${(t)command_line} = "array-local" ]; then
+    command="$command_line[1]"
+    else
+    command="$2"
+    fi
+    print -n -P "\e]2;"
+    echo -n "(${command})"
+    print -n -P " %n@%m:%~\a"
 }
 ## X環境上でだけウィンドウタイトルを変える。
 if [ -n "$DISPLAY" ]; then
-	preexec_functions=($preexec_functions update_title)
+    preexec_functions=($preexec_functions update_title)
 fi
 
 # screenで最後に実行したコマンドをウィンドウ名にする設定
 if [ "$TERM" = "screen" ]; then
-	chpwd () { echo -n "_`dirs`\\" }
-	preexec() {
-		# see [zsh-workers:13180]
-		# http://www.zsh.org/mla/workers/2000/msg03993.html
-		emulate -L zsh
-		local -a cmd; cmd=(${(z)2})
-		case $cmd[1] in
-			fg)
-				if (( $#cmd == 1 )); then
-					cmd=(builtin jobs -l %+)
-				else
-					cmd=(builtin jobs -l $cmd[2])
-				fi
-				;;
-			%*)
-				cmd=(builtin jobs -l $cmd[1])
-				;;
-			cd)
-				if (( $#cmd == 2)); then
-					cmd[1]=$cmd[2]
-				fi
-				;&
-			*)
-				echo -n "k$cmd[1]:t\\"
-				return
-				;;
-		esac
+    chpwd () { echo -n "_`dirs`\\" }
+    preexec() {
+        # see [zsh-workers:13180]
+        # http://www.zsh.org/mla/workers/2000/msg03993.html
+        emulate -L zsh
+        local -a cmd; cmd=(${(z)2})
+        case $cmd[1] in
+            fg)
+                if (( $#cmd == 1 )); then
+                    cmd=(builtin jobs -l %+)
+                else
+                    cmd=(builtin jobs -l $cmd[2])
+                fi
+                ;;
+            %*)
+                cmd=(builtin jobs -l $cmd[1])
+                ;;
+            cd)
+                if (( $#cmd == 2)); then
+                    cmd[1]=$cmd[2]
+                fi
+                ;&
+            *)
+                echo -n "k$cmd[1]:t\\"
+                return
+                ;;
+        esac
 
-		local -A jt; jt=(${(kv)jobtexts})
+        local -A jt; jt=(${(kv)jobtexts})
 
-		$cmd >>(read num rest
-			cmd=(${(z)${(e):-\$jt$num}})
-			echo -n "k$cmd[1]:[\\") 2>/dev/null
-	}
-	chpwd
+        $cmd >>(read num rest
+            cmd=(${(z)${(e):-\$jt$num}})
+            echo -n "k$cmd[1]:[\\") 2>/dev/null
+    }
+    chpwd
 fi
 
