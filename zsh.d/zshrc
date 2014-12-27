@@ -79,10 +79,10 @@ bg256()
 
 ## バージョン管理システムの情報も表示する
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats \
-    '(%s:%b)'
-zstyle ':vcs_info:*' actionformats \
-    '(%s:%b)|%a'
+
+zstyle ':vcs_info:*' max-exports 7
+zstyle ':vcs_info:*' formats '(%s:%b)' '%r'
+zstyle ':vcs_info:*' actionformats '(%s:%b)|%a'
 
 ### プロンプトバーの左側
 ###   %{%B%}...%{%b%}: 「...」を太字にする。
@@ -338,6 +338,11 @@ fi
 if [ "$TERM" = "screen" ]; then
     chpwd () { echo -n "_`dirs`\\" }
     preexec() {
+        # VCS管理下の場合はリポジトリ名をウィンドウ名にする
+        if [ -n "$vcs_info_msg_1_" ]; then
+            echo -n "k$vcs_info_msg_1_:t\\"
+            return
+        fi
         # see [zsh-workers:13180]
         # http://www.zsh.org/mla/workers/2000/msg03993.html
         emulate -L zsh
@@ -372,4 +377,3 @@ if [ "$TERM" = "screen" ]; then
     }
     chpwd
 fi
-
