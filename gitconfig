@@ -23,3 +23,5 @@
     excludefile = ~/.gitignore
 [push]
     default = current
+[ghq]
+    root = ~/src
