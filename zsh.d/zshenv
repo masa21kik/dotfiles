@@ -129,8 +129,6 @@ if type ggrep > /dev/null 2>&1; then
 fi
 ## grepのバージョンを検出。
 grep_version="$(grep --version | head -n 1 | sed -e 's/^[^0-9.]*\([0-9.]*\)$/\1/')"
-## デフォルトオプションの設定
-export GREP_OPTIONS
 ### バイナリファイルにはマッチさせない。
 GREP_OPTIONS="--binary-files=without-match"
 case "$grep_version" in
@@ -156,7 +154,8 @@ fi
 if grep --help | grep -q -- --color; then
     GREP_OPTIONS="--color=auto $GREP_OPTIONS"
 fi
-
+### GREP_OPTIONSはdeprecatedなのでaliasする
+alias grep="grep $GREP_OPTIONS"
 
 # エディタの設定
 ## vimを使う。
