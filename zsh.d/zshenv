@@ -131,15 +131,6 @@ fi
 grep_version="$(grep --version | head -n 1 | sed -e 's/^[^0-9.]*\([0-9.]*\)$/\1/')"
 ### バイナリファイルにはマッチさせない。
 GREP_OPTIONS="--binary-files=without-match"
-case "$grep_version" in
-    1.*|2.[0-4].*|2.5.[0-3])
-	;;
-    *)
-	### grep 2.5.4以降のみの設定
-        ### grep対象としてディレクトリを指定したらディレクトリ内を再帰的にgrepする。
-	# GREP_OPTIONS="--directories=recurse $GREP_OPTIONS"
-	;;
-esac
 ### 拡張子が.tmpのファイルは無視する。
 GREP_OPTIONS="--exclude=\*.tmp $GREP_OPTIONS"
 ## 管理用ディレクトリを無視する。
@@ -164,18 +155,3 @@ export EDITOR=vim
 if ! type vim > /dev/null 2>&1; then
     alias vim=vi
 fi
-
-# メールアドレスの設定
-## ~/.zsh.d/email → ~/.emailの順に探して最初に見つかったファイルから読み込む。
-## (N-.): 存在しないファイルは登録しない。
-##    パス(...): ...という条件にマッチするパスのみ残す。
-##            N: NULL_GLOBオプションを設定。
-##               globがマッチしなかったり存在しないパスを無視する。
-##            -: シンボリックリンク先のパスを評価。
-##            .: 通常のファイルのみ残す。
-# email_files=(~/.zsh.d/email(N-.)
-#              ~/.email(N-.))
-# for email_file in ${email_files}; do
-#     export EMAIL=$(cat "$email_file")
-#     break
-# done
