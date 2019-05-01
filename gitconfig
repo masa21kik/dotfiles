@@ -25,3 +25,11 @@
     default = current
 [ghq]
     root = ~/src
+[credential]
+    helper = osxkeychain
+[pager]
+    log = (diff-highlight 2>/dev/null || cat) | less
+    show = (diff-highlight 2>/dev/null || cat) | less
+    diff = (diff-highlight 2>/dev/null || cat) | less
+[interactive]
+    diffFilter = (diff-highlight 2>/dev/null || cat)
