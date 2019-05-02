@@ -1,0 +1,42 @@
+{
+  "pry": {
+    "prefix": "pry",
+    "body": ["require \"pry\"; binding.pry"]
+  },
+  "bom": {
+    "prefix": "bom",
+    "body": ["\"\\xef\\xbb\\xbf\""]
+  },
+  "cmdclass": {
+    "prefix": "cmdclass",
+    "body": [
+      "require \"optparse\"",
+      "",
+      "class $1",
+      "  def run(args)",
+      "    parse_args(args)",
+      "  end",
+      "",
+      "  private",
+      "",
+      "  def parse_args(args)",
+      "    @option = {}",
+      "    opt = OptionParser.new",
+      "    opt.on(\"$2\", \"$3\") { |v| @option[$4] = v }",
+      "    opt.parse!(args)",
+      "    abort(opt.help) if @option[$4].nil?",
+      "  end",
+      "end",
+      "",
+      "$1.new.run(ARGV) if \\$PROGRAM_NAME == __FILE__"
+    ]
+  },
+  "atcoder": {
+    "prefix": "atcoder",
+    "body": [
+      "n = gets.chomp.to_i",
+      "v = gets.chomp.split(\" \").map(&:to_i)",
+      "a, b, t = gets.chomp.split(\" \").map(&:to_i)"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "recommendations":[
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "file-icons.file-icons",
+        "jebbs.plantuml",
+        "mechatroner.rainbow-csv",
+        "rebornix.ruby",
+        "oderwat.indent-rainbow",
+        "shuworks.vscode-table-formatter",
+        "shardulm94.trailing-spaces",
+    ]
+}

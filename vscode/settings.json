@@ -1,0 +1,37 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.renderWhitespace": "boundary",
+  "editor.fontSize": 18,
+  "editor.fontFamily": "'Ricty Diminished', Menlo, Monaco, 'Courier New', monospace",
+  "editor.lineHeight": 20,
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.renderControlCharacters": true,
+  "files.autoGuessEncoding": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "terminal.integrated.fontSize": 18,
+  "terminal.integrated.scrollback": 100000,
+  "breadcrumbs.enabled": true,
+  "workbench.iconTheme": "file-icons",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "ruby.lint": {
+    "reek": true,
+    "rubocop": true,
+    "ruby": true, //Runs ruby -wc
+    "fasterer": true,
+    "debride": true,
+    "ruby-lint": true
+  },
+  "ruby.intellisense": "rubyLocate",
+  "ruby.codeCompletion": "rcodetools",
+  "ruby.format": false,
+  "ruby.useLanguageServer": true,
+  "ruby.locate": {
+    "exclude": "{**/@(test|spec|tmp|.*),**/@(test|spec|tmp|.*)/**,**/*_spec.rb}",
+    "include": "**/*.rb"
+  }
+}
